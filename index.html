@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENGINEERSKILLS IA - Plateforme de Formation</title>
+    <!-- Tailwind CSS pour le design épuré -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js pour la navigation interactive -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        [x-cloak] { display: none !important; }
+        .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-white text-slate-900 selection:bg-red-100" 
+      x-data="{ 
+        activeTab: 'home', 
+        selectedCourse: null, 
+        selectedJob: null, 
+        showNotification: false,
+        partnerSubTab: 'entreprises'
+      }"
+      x-init="lucide.createIcons();"
+      x-effect="if(selectedCourse || activeTab) { $nextTick(() => lucide.createIcons()); }">
+
+    <!-- NOTIFICATION D'INSCRIPTION (COCHE VERTE) -->
+    <div x-cloak x-show="showNotification" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform -translate-y-12"
+         x-transition:enter-end="opacity-100 transform translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 transform translate-y-0"
+         x-transition:leave-end="opacity-0 transform -translate-y-12"
+         class="fixed top-10 left-1/2 transform -translate-x-1/2 z-[200] bg-white border-2 border-green-500 text-green-600 px-8 py-4 rounded-3xl shadow-2xl flex items-center gap-4 font-black uppercase tracking-tighter text-sm">
+        <div class="bg-green-500 text-white p-1 rounded-full flex items-center justify-center">
+            <i data-lucide="check" class="w-4 h-4"></i>
+        </div>
+        <span>Vous vous êtes inscrit à ce module !</span>
+    </div>
+
+    <!-- BARRE DE NAVIGATION -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <!-- Logo interactif -->
+            <div @click="activeTab = 'home'; selectedJob = null; selectedCourse = null" class="flex items-center gap-2 cursor-pointer group">
+                <div class="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center text-white font-extrabold text-xl group-hover:rotate-6 transition-transform shadow-lg shadow-red-100">E</div>
+                <span class="font-extrabold text-xl tracking-tighter">ENGINEERSKILLS <span class="text-red-600">IA</span></span>
+            </div>
+            
+            <!-- Liens principaux -->
+            <div class="hidden md:flex items-center gap-10">
+                <button @click="activeTab = 'home'; selectedJob = null; selectedCourse = null" :class="activeTab === 'home' ? 'text-red-600' : 'text-gray-400 hover:text-gray-900'" class="font-bold text-xs uppercase tracking-widest transition-all relative py-2">
+                    Accueil
+                    <span x-show="activeTab === 'home'" class="absolute bottom-0 left-0 w-full h-1 bg-red-600 rounded-full"></span>
+                </button>
+                <button @click="activeTab = 'jobs'; selectedJob = null; selectedCourse = null" :class="activeTab === 'jobs' ? 'text-red-600' : 'text-gray-400 hover:text-gray-900'" class="font-bold text-xs uppercase tracking-widest transition-all relative py-2">
+                    Métiers
+                    <span x-show="activeTab === 'jobs'" class="absolute bottom-0 left-0 w-full h-1 bg-red-600 rounded-full"></span>
+                </button>
+                <button @click="activeTab = 'partenaires'; selectedJob = null; selectedCourse = null" :class="activeTab === 'partenaires' ? 'text-red-600' : 'text-gray-400 hover:text-gray-900'" class="font-bold text-xs uppercase tracking-widest transition-all relative py-2">
+                    Partenaires
+                    <span x-show="activeTab === 'partenaires'" class="absolute bottom-0 left-0 w-full h-1 bg-red-600 rounded-full"></span>
+                </button>
+            </div>
+
+            <!-- Bouton Espace Ingénieur (Lucas) -->
+            <button @click="activeTab = 'profile'; selectedJob = null; selectedCourse = null" :class="activeTab === 'profile' ? 'bg-red-600 shadow-xl shadow-red-100 text-white' : 'bg-slate-900 text-white hover:bg-red-600'" class="flex items-center gap-3 px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all">
+                <i data-lucide="user" class="w-4 h-4"></i> Espace Ingénieur
+            </button>
+        </div>
+    </nav>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="min-h-screen">
+        
+        <!-- 1. PAGE D'ACCUEIL -->
+        <template x-if="activeTab === 'home'">
+            <div class="animate-fade-in">
+                <!-- Hero Section -->
+                <section class="py-24 px-6 text-center max-w-5xl mx-auto">
+                    <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 mb-8 tracking-tight leading-tight">
+                        L'ingénierie face à la <br><span class="text-red-600">Révolution IA</span>
+                    </h1>
+                    <p class="text-xl text-slate-500 leading-relaxed max-w-3xl mx-auto italic">
+                        Aujourd'hui et dans les années futures, l'IA prend beaucoup de place au quotidien et remplace certaines tâches, voire des métiers. Le but de ce site est de créer des formations adaptées en fonction des besoins actuels de compétences dans plusieurs corps de métiers d'ingénieur différents.
+                    </p>
+                    <div class="mt-12 flex flex-col md:flex-row justify-center gap-6">
+                        <button @click="activeTab = 'profile'" class="bg-red-600 hover:bg-red-700 text-white px-10 py-5 rounded-[2rem] font-bold shadow-2xl shadow-red-200 transition-all hover:scale-105">
+                            Évaluer mon employabilité
+                        </button>
+                        <button @click="activeTab = 'jobs'" class="border-2 border-slate-200 hover:border-red-600 text-slate-400 hover:text-red-600 px-10 py-5 rounded-[2rem] font-bold transition-all">
+                            Découvrir les métiers
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Chiffres Clés -->
+                <section class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 pb-24">
+                    <div class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm text-center">
+                        <div class="text-4xl font-black text-red-600 mb-2 tracking-tighter">1,2M</div>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Ingénieurs en France</p>
+                    </div>
+                    <div class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm text-center">
+                        <div class="text-4xl font-black text-red-600 mb-2 tracking-tighter">30%</div>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Tâches automatisables</p>
+                    </div>
+                    <div class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm text-center">
+                        <div class="text-4xl font-black text-red-600 mb-2 tracking-tighter">2030</div>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Horizon Requalification</p>
+                    </div>
+                </section>
+            </div>
+        </template>
+
+        <!-- 2. ONGLET MÉTIERS -->
+        <template x-if="activeTab === 'jobs'">
+            <div class="animate-fade-in max-w-7xl mx-auto py-16 px-6">
+                <div x-show="!selectedJob">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-black uppercase tracking-tighter mb-4 italic text-slate-900">Les Métiers d'Ingénieurs</h2>
+                        <div class="w-24 h-1.5 bg-red-600 mx-auto rounded-full"></div>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <template x-for="job in [
+                            { id: 1, title: 'Ingénieur Génie Civil', icon: 'building-2', courses: ['BIM & Jumeaux Numériques', 'Construction Durable', 'Gestion de Risques Chantiers'] },
+                            { id: 2, title: 'Ingénieur d\'Affaires', icon: 'briefcase', courses: ['Négociation Complexe', 'Droit FIDIC', 'Finance de Projet'] },
+                            { id: 3, title: 'Ingénieur Informatique', icon: 'code', courses: ['Architecture Cloud', 'Cybersécurité IA', 'DevOps & Automatisation'] },
+                            { id: 4, title: 'Ingénieur Méthodes', icon: 'settings', courses: ['Lean Six Sigma 4.0', 'Logistique IA', 'Robotique Collaborative'] },
+                            { id: 5, title: 'Ingénieur Électrique', icon: 'zap', courses: ['Smart Grids', 'Stockage d\'Énergie', 'Maintenance Prédictive'] },
+                            { id: 6, title: 'Ingénieur Mécanique', icon: 'cpu', courses: ['Fabrication Additive', 'Conception Assistée par IA', 'Mécatronique'] },
+                            { id: 7, title: 'Ingénieur Environnement', icon: 'leaf', courses: ['Bilan Carbone IA', 'Économie Circulaire', 'Gestion des Eaux'] },
+                            { id: 8, title: 'Ingénieur Aérospatial', icon: 'plane', courses: ['Systèmes Embarqués', 'Nouveaux Matériaux', 'Navigation Autonome'] },
+                            { id: 9, title: 'Ingénieur Qualité', icon: 'shield-check', courses: ['Contrôle Vision IA', 'Normes ISO 2025', 'Audit de Processus'] },
+                            { id: 10, title: 'Ingénieur Énergie', icon: 'flame', courses: ['Hydrogène Vert', 'Nucléaire de Demain', 'Efficacité Énergétique'] }
+                        ]">
+                            <div @click="selectedJob = job" class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl hover:border-red-600 transition-all cursor-pointer group">
+                                <div class="mb-6 p-4 bg-red-50 inline-block rounded-2xl text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                                    <i :data-lucide="job.icon" class="w-8 h-8"></i>
+                                </div>
+                                <h3 class="text-xl font-black text-slate-900 group-hover:text-red-600 transition-colors" x-text="job.title"></h3>
+                                <p class="text-xs text-slate-400 font-bold mt-2 uppercase tracking-widest">Voir les formations adaptées</p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div x-show="selectedJob" class="animate-fade-in">
+                    <button @click="selectedJob = null" class="flex items-center gap-2 text-red-600 font-black text-xs uppercase tracking-widest mb-10 hover:translate-x-[-4px] transition-transform">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Retour à la liste
+                    </button>
+                    <div class="bg-white rounded-[3.5rem] border border-gray-100 p-12 shadow-sm mb-12 flex flex-col md:flex-row items-center gap-10">
+                        <div class="w-24 h-24 bg-red-600 rounded-[2rem] flex items-center justify-center text-white shadow-xl">
+                            <i :data-lucide="selectedJob?.icon" class="w-12 h-12"></i>
+                        </div>
+                        <h2 class="text-4xl font-black text-slate-900 tracking-tighter" x-text="selectedJob?.title"></h2>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <template x-for="courseName in selectedJob?.courses">
+                            <div @click="selectedCourse = {title: courseName, cat: selectedJob.title, desc: 'Module certifié ENGINEERSKILLS IA.', dur: '20h', lvl: 'Intermédiaire'}" class="bg-slate-50 p-8 rounded-[2rem] border border-transparent hover:border-red-600 hover:bg-white hover:shadow-xl transition-all cursor-pointer group">
+                                <h4 class="text-lg font-black text-slate-900 group-hover:text-red-600 transition-colors mb-6" x-text="courseName"></h4>
+                                <div class="flex items-center justify-between pt-4 border-t border-slate-200">
+                                    <span class="text-[10px] font-bold text-slate-400 uppercase">20h • Intermédiaire</span>
+                                    <div class="p-2 bg-white rounded-full text-red-600 shadow-sm"><i data-lucide="plus" class="w-4 h-4"></i></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- 3. ESPACE INGÉNIEUR (LUCAS MARTIN) -->
+        <template x-if="activeTab === 'profile'">
+            <div class="max-w-6xl mx-auto py-12 px-6 space-y-10 animate-fade-in">
+                <!-- Entête du Profil -->
+                <div class="bg-white rounded-[3.5rem] border border-gray-100 p-12 shadow-sm flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-80 h-80 bg-red-50 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    
+                    <!-- PHOTO DE LUCAS MARTIN -->
+                    <img src="image_366868.png" alt="Lucas Martin" class="w-32 h-32 rounded-[2.5rem] object-cover shadow-2xl z-10 border-4 border-white">
+                    
+                    <div class="text-center md:text-left z-10 flex-1">
+                        <h2 class="text-5xl font-black text-slate-900 tracking-tighter uppercase">LUCAS MARTIN</h2>
+                        <div class="flex flex-wrap justify-center md:justify-start gap-6 mt-4">
+                            <span class="flex items-center gap-2 text-red-600 font-bold uppercase text-[11px] tracking-[0.2em]">
+                                <i data-lucide="briefcase" class="w-4 h-4"></i> Étudiant @ École d'Ingénieur
+                            </span>
+                            <span class="flex items-center gap-2 text-slate-400 font-bold uppercase text-[11px] tracking-[0.2em]">
+                                <i data-lucide="school" class="w-4 h-4"></i> Parcours Ingénieur Généraliste
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-10">
+                    <!-- Mes Acquis (ENRICHI) -->
+                    <div class="space-y-8">
+                        <div class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm">
+                            <h3 class="text-sm font-black mb-8 uppercase tracking-widest flex items-center gap-3">
+                                <i data-lucide="check-circle-2" class="text-green-500"></i> Parcours & Acquis
+                            </h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Éducation détaillée -->
+                                <div>
+                                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3">Formation Académique</p>
+                                    <div class="border-l-2 border-red-600 pl-4 py-1">
+                                        <p class="text-xs font-bold text-slate-900">Élève Ingénieur</p>
+                                        <p class="text-[10px] text-slate-500 font-medium">CESI École d'Ingénieurs (En cours)</p>
+                                        <p class="text-[9px] text-red-600 font-bold mt-1 uppercase">Spécialisation souhaitée : Efficacité Énergétique</p>
+                                    </div>
+                                </div>
+
+                                <!-- Expériences Clés -->
+                                <div>
+                                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3">Projets & Stages</p>
+                                    <div class="space-y-3">
+                                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                            <p class="text-[10px] font-bold">Projet d'Ingénierie IA</p>
+                                            <p class="text-[9px] text-slate-500 italic">Optimisation de process industriels via IA</p>
+                                        </div>
+                                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                            <p class="text-[10px] font-bold">Stage de découverte</p>
+                                            <p class="text-[9px] text-slate-500 italic">Immersion milieu industriel (Vinci Energies)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Hard Skills -->
+                                <div>
+                                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3">Compétences Techniques</p>
+                                    <div class="flex flex-wrap gap-1.5">
+                                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-[9px] font-black rounded uppercase tracking-tighter">Bases Génie Élec</span>
+                                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-[9px] font-black rounded uppercase tracking-tighter">Bases Génie Méc</span>
+                                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-[9px] font-black rounded uppercase tracking-tighter">Conception CAO</span>
+                                    </div>
+                                </div>
+
+                                <!-- Digital Skills -->
+                                <div>
+                                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3">Numérique & IA</p>
+                                    <div class="flex flex-wrap gap-1.5">
+                                        <span class="px-2 py-1 bg-red-50 text-red-600 text-[9px] font-black rounded uppercase tracking-tighter">Prompt Engineering</span>
+                                        <span class="px-2 py-1 bg-red-50 text-red-600 text-[9px] font-black rounded uppercase tracking-tighter">Anglais B2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 p-10 rounded-[2.5rem] border border-yellow-100">
+                            <h3 class="text-sm font-black text-yellow-800 mb-4 uppercase tracking-widest flex items-center gap-3">
+                                <i data-lucide="alert-triangle"></i> Recommandation Étudiant
+                            </h3>
+                            <p class="text-sm text-yellow-900/80 leading-relaxed font-medium">
+                                En tant qu'étudiant, il est crucial d'anticiper l'impact de l'IA sur votre futur métier. Nous vous conseillons de renforcer vos compétences en <strong>Droit</strong> et <strong>Gestion de Projets Numériques</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Recommandations Personnalisées -->
+                    <div class="lg:col-span-2 bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm">
+                        <h3 class="text-sm font-black uppercase tracking-widest flex items-center gap-3 mb-10">
+                            <i data-lucide="trending-up" class="text-red-600"></i> Plan de Formation Lucas
+                        </h3>
+                        <div class="space-y-4">
+                            <template x-for="course in [
+                                { title: 'IA et Responsabilité Décisionnelle', cat: 'Ethique', icon: 'file-text' },
+                                { title: 'Management de Projets Complexes IA', cat: 'Gestion', icon: 'briefcase' },
+                                { title: 'IA Générative Appliquée au Génie Civil', cat: 'Technique', icon: 'building-2' }
+                            ]">
+                                <div @click="selectedCourse = {title: course.title, cat: course.cat, desc: 'Module certifié pour sécuriser l\'employabilité des futurs ingénieurs.', dur: '20h', lvl: 'Étudiant'}" class="group p-6 bg-slate-50 hover:bg-white border border-transparent hover:border-red-600 hover:shadow-2xl transition-all rounded-[2rem] cursor-pointer flex items-center justify-between">
+                                    <div class="flex items-center gap-6">
+                                        <div class="p-4 bg-white rounded-2xl shadow-sm text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors"><i :data-lucide="course.icon"></i></div>
+                                        <h4 class="text-lg font-extrabold text-slate-900" x-text="course.title"></h4>
+                                    </div>
+                                    <div class="p-2 bg-white rounded-full text-slate-200 group-hover:text-red-600 transition-all"><i data-lucide="arrow-right"></i></div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- 4. SECTION PARTENAIRES -->
+        <template x-if="activeTab === 'partenaires'">
+            <div class="max-w-6xl mx-auto py-24 px-6 space-y-12 animate-fade-in">
+                <div class="text-center space-y-4">
+                    <h2 class="text-4xl font-black uppercase tracking-tighter text-slate-900">Alliance Stratégique</h2>
+                    <p class="text-slate-400 font-bold uppercase tracking-[0.2em] text-[10px] italic">Ils nous ont fait confiance</p>
+                    <div class="w-24 h-1.5 bg-red-600 mx-auto rounded-full"></div>
+                </div>
+
+                <!-- Sous-navigation Partenaires -->
+                <div class="flex justify-center gap-4">
+                    <button @click="partnerSubTab = 'entreprises'" 
+                            :class="partnerSubTab === 'entreprises' ? 'bg-red-600 text-white shadow-lg shadow-red-100' : 'bg-slate-50 text-slate-400 hover:text-slate-900'"
+                            class="px-8 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all">
+                        Entreprises
+                    </button>
+                    <button @click="partnerSubTab = 'institutions'" 
+                            :class="partnerSubTab === 'institutions' ? 'bg-red-600 text-white shadow-lg shadow-red-100' : 'bg-slate-50 text-slate-400 hover:text-slate-900'"
+                            class="px-8 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all">
+                        Institutions
+                    </button>
+                </div>
+
+                <!-- Grille de partenaires -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8">
+                    <template x-if="partnerSubTab === 'entreprises'">
+                        <template x-for="p in ['Airbus', 'Thales', 'Schneider Electric', 'Dassault Systèmes', 'Bouygues Énergie', 'Vinci', 'Alstom', 'Renault']">
+                            <div class="bg-white p-12 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center justify-center group hover:border-red-600 transition-all h-40">
+                                <span class="font-black text-slate-200 group-hover:text-red-600 transition-colors uppercase tracking-[0.3em] text-[10px] text-center px-4" x-text="p"></span>
+                            </div>
+                        </template>
+                    </template>
+                    <template x-if="partnerSubTab === 'institutions'">
+                        <template x-for="p in ['CESI', 'Polytechnique', 'Inria', 'CTI', 'IESF', 'Syntec', 'OPIIEC', 'Institut Montaigne']">
+                            <div class="bg-white p-12 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center justify-center group hover:border-red-600 transition-all h-40">
+                                <span class="font-black text-slate-200 group-hover:text-red-600 transition-colors uppercase tracking-[0.3em] text-[10px] text-center px-4" x-text="p"></span>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+    </main>
+
+    <!-- FENÊTRE MODALE -->
+    <div x-cloak x-show="selectedCourse" 
+         class="fixed inset-0 z-[150] flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-xl" 
+         @click="selectedCourse = null">
+        <div class="bg-white rounded-[3rem] p-10 md:p-14 max-w-xl w-full shadow-2xl animate-fade-in relative overflow-hidden" @click.stop>
+            <div class="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-full -translate-y-1/2 translate-x-1/2 -z-10"></div>
+            
+            <div class="flex justify-between items-start mb-8 relative z-10">
+                <div class="p-5 bg-red-600 rounded-[1.5rem] text-white shadow-xl shadow-red-200 flex items-center justify-center">
+                    <i data-lucide="book-open" class="w-8 h-8"></i>
+                </div>
+                <button @click="selectedCourse = null" class="p-3 hover:bg-slate-100 rounded-full transition-colors text-slate-400">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <div class="relative z-10 space-y-6">
+                <div>
+                    <h3 class="text-4xl font-black text-slate-900 mb-2 uppercase tracking-tighter leading-tight" x-text="selectedCourse?.title"></h3>
+                    <span class="inline-block px-4 py-2 bg-slate-100 text-slate-600 text-[11px] font-black rounded-xl uppercase tracking-widest" x-text="selectedCourse?.cat"></span>
+                </div>
+
+                <p class="text-slate-500 leading-relaxed text-lg" x-text="selectedCourse?.desc"></p>
+                
+                <div class="grid grid-cols-2 gap-6 pt-4">
+                    <div class="p-6 bg-slate-50 rounded-[2rem] text-center border border-slate-100 shadow-sm">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Durée du module</p>
+                        <p class="text-3xl font-black text-slate-900" x-text="selectedCourse?.dur"></p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-[2rem] text-center border border-slate-100 shadow-sm">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Difficulté</p>
+                        <p class="text-3xl font-black text-slate-900" x-text="selectedCourse?.lvl"></p>
+                    </div>
+                </div>
+                
+                <div class="pt-6">
+                    <button @click="showNotification = true; selectedCourse = null; setTimeout(() => showNotification = false, 3000)" 
+                            class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-6 rounded-[2rem] transition-all shadow-2xl shadow-red-200 uppercase tracking-widest text-sm flex items-center justify-center gap-3 active:scale-95">
+                        <i data-lucide="plus-circle" class="w-5 h-5"></i> S'inscrire à ce module
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIED DE PAGE VIDE -->
+    <footer class="py-12 bg-white"></footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
