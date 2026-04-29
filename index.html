@@ -16,6 +16,11 @@
         [x-cloak] { display: none !important; }
         .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Personnalisation Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #ef4444; border-radius: 10px; }
     </style>
 </head>
 <body class="bg-white text-slate-900 selection:bg-red-100" 
@@ -24,7 +29,59 @@
         selectedCourse: null, 
         selectedJob: null, 
         showNotification: false,
-        partnerSubTab: 'entreprises'
+        partnerSubTab: 'entreprises',
+        jobs: [
+            { id: 1, title: 'Ingénieur Génie Civil', icon: 'building-2', courses: [
+                {title: 'BIM & Jumeaux Numériques', desc: 'Optimisation de la conception bâtiment.', prog: ['Standardisation des données', 'Modélisation 3D dynamique', 'Interopérabilité des logiciels']},
+                {title: 'Construction Durable', desc: 'Calcul d\'impact environnemental.', prog: ['Calcul d\'empreinte carbone', 'Matériaux biosourcés', 'Cycle de vie du bâtiment']},
+                {title: 'Gestion de Risques Chantiers', desc: 'Sécurité assistée par IA.', prog: ['Analyse prédictive de sécurité', 'Suivi par capteurs IoT', 'Rapports automatisés']}
+            ]},
+            { id: 2, title: 'Ingénieur d\'Affaires', icon: 'briefcase', courses: [
+                {title: 'Négociation Complexe', desc: 'Stratégies de vente B2B.', prog: ['Psychologie de l\'acheteur', 'Stratégies de closing', 'Gestion des litiges']},
+                {title: 'Droit FIDIC', desc: 'Gestion contractuelle internationale.', prog: ['Clauses contractuelles types', 'Règlement des différends', 'Risques internationaux']},
+                {title: 'Finance de Projet', desc: 'Analyse de rentabilité avancée.', prog: ['Analyse de rentabilité', 'P&L et Cash-flow', 'Ingénierie financière']}
+            ]},
+            { id: 3, title: 'Ingénieur Informatique', icon: 'code', courses: [
+                {title: 'Architecture Cloud', desc: 'Infrastructures modernes et scalables.', prog: ['Infrastructures AWS/Azure', 'Micro-services', 'Scalabilité']},
+                {title: 'Cybersécurité IA', desc: 'Protection des données par IA.', prog: ['Détection d\'intrusion par IA', 'Cryptographie', 'Analyse de vulnérabilité']},
+                {title: 'DevOps & Automatisation', desc: 'Pipeline de déploiement continu.', prog: ['CI/CD pipelines', 'Docker & Kubernetes', 'Infrastructure as Code']}
+            ]},
+            { id: 4, title: 'Ingénieur Méthodes', icon: 'settings', courses: [
+                {title: 'Lean Six Sigma 4.0', desc: 'Optimisation industrielle avancée.', prog: ['Optimisation statistique', 'DMAIC', 'Management visuel']},
+                {title: 'Logistique IA', desc: 'Gestion de supply chain intelligente.', prog: ['Prédiction des stocks', 'Optimisation de tournées', 'Supply chain résiliente']},
+                {title: 'Robotique Collaborative', desc: 'Travail homme-machine.', prog: ['Programmation de Cobots', 'Sécurité homme-machine', 'Flexibilité industrielle']}
+            ]},
+            { id: 5, title: 'Ingénieur Électrique', icon: 'zap', courses: [
+                {title: 'Smart Grids', desc: 'Réseaux électriques communicants.', prog: ['Gestion de la demande', 'Intégration EnR', 'Protocoles de communication']},
+                {title: 'Maintenance Prédictive', desc: 'Anticipation des pannes.', prog: ['Analyse vibratoire par IA', 'Capteurs intelligents', 'Planification de maintenance']},
+                {title: 'Conversion d\'Énergie', desc: 'Optimisation des convertisseurs.', prog: ['Électronique de puissance', 'Hacheurs et Onduleurs', 'Rendement énergétique']}
+            ]},
+            { id: 6, title: 'Ingénieur Mécanique', icon: 'cpu', courses: [
+                {title: 'Fabrication Additive', desc: 'Impression 3D industrielle.', prog: ['Design pour impression 3D', 'Optimisation topologique', 'Caractérisation matériaux']},
+                {title: 'Mécatronique IA', desc: 'Systèmes mécaniques intelligents.', prog: ['Asservissements numériques', 'Capteurs embarqués', 'Logique floue']},
+                {title: 'Simulation Multi-physique', desc: 'Modélisation avancée.', prog: ['Éléments finis', 'Dynamique des fluides', 'Corrélation essais-calcul']}
+            ]},
+            { id: 7, title: 'Ingénieur Énergie', icon: 'flame', courses: [
+                {title: 'Hydrogène Vert', desc: 'Vecteur énergétique du futur.', prog: ['Électrolyse de l\'eau', 'Stockage H2', 'Pile à combustible']},
+                {title: 'Optimisation Thermique', desc: 'IA pour les flux thermiques.', prog: ['Échanges de chaleur', 'IA pour la thermodynamique', 'Récupération de chaleur fatale']},
+                {title: 'Mix Énergétique', desc: 'Transition vers le bas carbone.', prog: ['Prospective énergétique', 'Solaire et Éolien', 'Stockage massif']}
+            ]},
+            { id: 8, title: 'Ingénieur Environnement', icon: 'leaf', courses: [
+                {title: 'Bilan Carbone IA', desc: 'Automatisation de l\'analyse carbone.', prog: ['Méthode Bilan Carbone', 'Scope 1, 2, 3', 'Plan de décarbonation IA']},
+                {title: 'Économie Circulaire', desc: 'Récupération des ressources.', prog: ['Analyse de cycle de vie', 'Gestion des déchets', 'Éco-conception']},
+                {title: 'Traitement des Eaux', desc: 'Pilotage intelligent des stations.', prog: ['Épuration biologique', 'IA pour la qualité de l\'eau', 'IoT et gestion de crise']}
+            ]},
+            { id: 9, title: 'Ingénieur Aérospatial', icon: 'plane', courses: [
+                {title: 'Systèmes Embarqués', desc: 'Logiciels de vol critiques.', prog: ['RTOS et sécurité de vol', 'Protocoles ARINC', 'Certification DO-178C']},
+                {title: 'Matériaux Composites', desc: 'Structures légères et résistantes.', prog: ['Fibres de carbone', 'Fabrication de structures', 'Contrôle non destructif']},
+                {title: 'Navigation Autonome', desc: 'Pilotage automatique par IA.', prog: ['Vision par ordinateur spatiale', 'Traitement de signal GNSS', 'Fusion de données']}
+            ]},
+            { id: 10, title: 'Ingénieur Qualité', icon: 'shield-check', courses: [
+                {title: 'Contrôle Vision IA', desc: 'Inspection automatique de pièces.', prog: ['Deep Learning pour le contrôle', 'Caméras industrielles', 'Zéro défaut']},
+                {title: 'Normes ISO 2025', desc: 'Évolution des référentiels.', prog: ['ISO 9001 vs IA', 'Compliance numérique', 'Audit de process IA']},
+                {title: 'Maîtrise des Procédés', desc: 'Pilotage statistique avancé.', prog: ['MSP/SPC numérique', 'Analyse des causes racines', 'Amélioration continue']}
+            ]}
+        ]
       }"
       x-init="lucide.createIcons();"
       x-effect="if(selectedCourse || activeTab) { $nextTick(() => lucide.createIcons()); }">
@@ -99,7 +156,6 @@
                     </div>
                 </section>
 
-                <!-- Chiffres Clés -->
                 <section class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 pb-24 text-center">
                     <div class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm">
                         <div class="text-4xl font-black text-red-600 mb-2 tracking-tighter">1,2M</div>
@@ -117,7 +173,7 @@
             </div>
         </template>
 
-        <!-- 2. MÉTIERS -->
+        <!-- 2. MÉTIERS (PLUS DE 10 MÉTIERS) -->
         <template x-if="activeTab === 'jobs'">
             <div class="animate-fade-in max-w-7xl mx-auto py-16 px-6">
                 <div x-show="!selectedJob">
@@ -126,28 +182,7 @@
                         <div class="w-24 h-1.5 bg-red-600 mx-auto rounded-full"></div>
                     </div>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <template x-for="job in [
-                            { id: 1, title: 'Ingénieur Génie Civil', icon: 'building-2', courses: [
-                                {title: 'BIM & Jumeaux Numériques', prog: ['Standardisation des données', 'Modélisation 3D dynamique', 'Interopérabilité des logiciels']},
-                                {title: 'Construction Durable', prog: ['Calcul d\'empreinte carbone', 'Matériaux biosourcés', 'Cycle de vie du bâtiment']},
-                                {title: 'Gestion de Risques Chantiers', prog: ['Analyse prédictive de sécurité', 'Suivi par capteurs IoT', 'Rapports automatisés']}
-                            ]},
-                            { id: 2, title: 'Ingénieur d\'Affaires', icon: 'briefcase', courses: [
-                                {title: 'Négociation Complexe', prog: ['Psychologie de l\'acheteur', 'Stratégies de closing', 'Gestion des litiges']},
-                                {title: 'Droit FIDIC', prog: ['Clauses contractuelles types', 'Règlement des différends', 'Risques internationaux']},
-                                {title: 'Finance de Projet', prog: ['Analyse de rentabilité', 'P&L et Cash-flow', 'Ingénierie financière']}
-                            ]},
-                            { id: 3, title: 'Ingénieur Informatique', icon: 'code', courses: [
-                                {title: 'Architecture Cloud', prog: ['Infrastructures AWS/Azure', 'Micro-services', 'Scalabilité']},
-                                {title: 'Cybersécurité IA', prog: ['Détection d\'intrusion par IA', 'Cryptographie', 'Analyse de vulnérabilité']},
-                                {title: 'DevOps & Automatisation', prog: ['CI/CD pipelines', 'Docker & Kubernetes', 'Infrastructure as Code']}
-                            ]},
-                            { id: 4, title: 'Ingénieur Méthodes', icon: 'settings', courses: [
-                                {title: 'Lean Six Sigma 4.0', prog: ['Optimisation statistique', 'DMAIC', 'Management visuel']},
-                                {title: 'Logistique IA', prog: ['Prédiction des stocks', 'Optimisation de tournées', 'Supply chain résiliente']},
-                                {title: 'Robotique Collaborative', prog: ['Programmation de Cobots', 'Sécurité homme-machine', 'Flexibilité industrielle']}
-                            ]}
-                        ]">
+                        <template x-for="job in jobs">
                             <div @click="selectedJob = job" class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl hover:border-red-600 transition-all cursor-pointer group">
                                 <div class="mb-6 p-4 bg-red-50 inline-block rounded-2xl text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors">
                                     <i :data-lucide="job.icon" class="w-8 h-8"></i>
@@ -159,6 +194,7 @@
                     </div>
                 </div>
 
+                <!-- Détail d'un métier -->
                 <div x-show="selectedJob" class="animate-fade-in">
                     <button @click="selectedJob = null" class="flex items-center gap-2 text-red-600 font-black text-[10px] uppercase tracking-widest mb-10 hover:translate-x-[-4px] transition-transform">
                         <i data-lucide="arrow-left" class="w-4 h-4"></i> Retour à la liste
@@ -171,7 +207,7 @@
                     </div>
                     <div class="grid md:grid-cols-3 gap-8">
                         <template x-for="course in selectedJob?.courses">
-                            <div @click="selectedCourse = {title: course.title, cat: selectedJob.title, desc: 'Module certifié ENGINEERSKILLS IA optimisé pour le métier.', dur: '20h', lvl: 'Intermédiaire', program: course.prog}" class="bg-slate-50 p-8 rounded-[2rem] border border-transparent hover:border-red-600 hover:bg-white hover:shadow-xl transition-all cursor-pointer group">
+                            <div @click="selectedCourse = {title: course.title, cat: selectedJob.title, desc: course.desc, dur: '20h', lvl: 'Intermédiaire', program: course.prog}" class="bg-slate-50 p-8 rounded-[2rem] border border-transparent hover:border-red-600 hover:bg-white hover:shadow-xl transition-all cursor-pointer group">
                                 <h4 class="text-lg font-black text-slate-900 group-hover:text-red-600 transition-colors mb-6" x-text="course.title"></h4>
                                 <div class="flex items-center justify-between pt-4 border-t border-slate-200">
                                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">20h • Certifiant</span>
@@ -187,13 +223,9 @@
         <!-- 3. ESPACE INGÉNIEUR (LUCAS MARTIN) -->
         <template x-if="activeTab === 'profile'">
             <div class="max-w-6xl mx-auto py-12 px-6 space-y-10 animate-fade-in">
-                <!-- Header Profil -->
                 <div class="bg-white rounded-[3.5rem] border border-gray-100 p-12 shadow-sm flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-80 h-80 bg-red-50 rounded-full -translate-y-1/2 translate-x-1/2 opacity-50"></div>
-                    
-                    <!-- INITIALES -->
                     <div class="w-32 h-32 bg-red-600 rounded-[2.5rem] flex items-center justify-center text-white text-5xl font-black shadow-2xl z-10 border-4 border-white">LM</div>
-                    
                     <div class="text-center md:text-left z-10 flex-1">
                         <h2 class="text-5xl font-black text-slate-900 tracking-tighter uppercase">LUCAS MARTIN</h2>
                         <div class="flex flex-wrap justify-center md:justify-start gap-6 mt-4">
@@ -214,7 +246,6 @@
                             <h3 class="text-xs font-black mb-8 uppercase tracking-widest flex items-center gap-3 text-slate-900">
                                 <i data-lucide="check-circle-2" class="text-green-500"></i> Parcours & Acquis
                             </h3>
-                            
                             <div class="space-y-6">
                                 <div>
                                     <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Formation Académique</p>
@@ -224,48 +255,31 @@
                                         <p class="text-[9px] text-red-600 font-bold mt-1 uppercase tracking-widest">Spécialisation : Efficacité Énergétique</p>
                                     </div>
                                 </div>
-
                                 <div>
                                     <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Expériences & Projets</p>
                                     <div class="space-y-3">
-                                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 group hover:border-red-200 transition-colors">
-                                            <p class="text-[11px] font-black text-slate-800">Projet d'Ingénierie IA</p>
-                                            <p class="text-[10px] text-slate-500 italic">Optimisation de process via IA générative</p>
-                                        </div>
+                                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 group hover:border-red-200 transition-colors text-xs font-black">Projet IA Énergie</div>
                                     </div>
                                 </div>
-
-                                <div>
-                                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Compétences Techniques</p>
-                                    <div class="flex flex-wrap gap-2">
-                                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-[9px] font-black rounded uppercase tracking-tighter">Génie Électrique</span>
-                                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-[9px] font-black rounded uppercase tracking-tighter">Génie Mécanique</span>
-                                        <span class="px-2 py-1 bg-slate-100 text-slate-700 text-[9px] font-black rounded uppercase tracking-tighter">Thermodynamique</span>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Numérique & IA</p>
-                                    <div class="flex flex-wrap gap-2">
-                                        <span class="px-2 py-1 bg-red-50 text-red-600 text-[9px] font-black rounded uppercase tracking-tighter">Prompt Engineering</span>
-                                        <span class="px-2 py-1 bg-red-50 text-red-600 text-[9px] font-black rounded uppercase tracking-tighter">Data Analysis</span>
-                                        <span class="px-2 py-1 bg-red-50 text-red-600 text-[9px] font-black rounded uppercase tracking-tighter">Anglais B2</span>
-                                    </div>
+                                <div class="flex flex-wrap gap-2 pt-4">
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-700 text-[9px] font-black rounded uppercase tracking-tighter">Génie Électrique</span>
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-700 text-[9px] font-black rounded uppercase tracking-tighter">Génie Mécanique</span>
+                                    <span class="px-2 py-1 bg-red-50 text-red-600 text-[9px] font-black rounded uppercase tracking-tighter">Anglais B2</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="bg-yellow-50 p-10 rounded-[2.5rem] border border-yellow-100">
                             <h3 class="text-xs font-black text-yellow-800 mb-4 uppercase tracking-widest flex items-center gap-3">
-                                <i data-lucide="alert-triangle"></i> Analyse de Profil
+                                <i data-lucide="alert-triangle"></i> Analyse Profil
                             </h3>
                             <p class="text-sm text-yellow-900/80 leading-relaxed font-medium">
-                                En tant que futur expert en <strong>Efficacité Énergétique</strong>, vous devez maîtriser les algorithmes d'IA pour piloter la décarbonation.
+                                Futur expert en <strong>Efficacité Énergétique</strong>, maîtrisez l'IA pour piloter la décarbonation.
                             </p>
                         </div>
                     </div>
 
-                    <!-- Recommandations (SPÉCIALISÉES IA + ÉNERGIE) -->
+                    <!-- Recommandations Spécialisées -->
                     <div class="lg:col-span-2 bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm">
                         <h3 class="text-xs font-black uppercase tracking-widest flex items-center gap-3 mb-10 text-slate-900">
                             <i data-lucide="trending-up" class="text-red-600"></i> Plan de Formation Lucas (IA & Énergie)
@@ -276,22 +290,22 @@
                                     title: 'IA pour l\'Optimisation des Systèmes Énergétiques', 
                                     cat: 'Énergie', 
                                     icon: 'zap',
-                                    desc: 'Maîtriser les algorithmes prédictifs pour optimiser la consommation des bâtiments industriels.',
+                                    desc: 'Maîtriser les algorithmes prédictifs pour optimiser la consommation industrielle.',
                                     prog: ['Traitement des données IoT énergétiques', 'Algorithmes de Machine Learning pour la prédiction de charge', 'Optimisation HVAC en temps réel']
                                 },
                                 { 
                                     title: 'Maintenance Prédictive & Smart Grids', 
                                     cat: 'Réseaux', 
                                     icon: 'cpu',
-                                    desc: 'Intégration de l\'IA dans la gestion des réseaux électriques intelligents.',
-                                    prog: ['Détection d\'anomalies sur réseaux haute tension', 'Gestion des flux intermittents (EnR)', 'Apprentissage par renforcement pour le Smart Grid']
+                                    desc: 'Intégration de l\'IA dans la gestion des réseaux intelligents.',
+                                    prog: ['Détection d\'anomalies sur réseaux haute tension', 'Gestion des flux intermittents (EnR)', 'Apprentissage par renforcement']
                                 },
                                 { 
                                     title: 'Audit Énergétique 4.0 & Vision IA', 
                                     cat: 'Diagnostic', 
                                     icon: 'search',
                                     desc: 'Automatisation des diagnostics thermiques par analyse d\'image IA.',
-                                    prog: ['Traitement d\'images thermiques par CNN', 'Audit par drone et vision par ordinateur', 'Génération automatique de rapports de préconisation']
+                                    prog: ['Traitement d\'images thermiques par CNN', 'Audit par drone et vision par ordinateur', 'Génération automatique de rapports']
                                 }
                             ]">
                                 <div @click="selectedCourse = {title: course.title, cat: course.cat, desc: course.desc, dur: '24h', lvl: 'Expert', program: course.prog}" class="group p-6 bg-slate-50 hover:bg-white border border-transparent hover:border-red-600 hover:shadow-2xl transition-all rounded-[2rem] cursor-pointer flex items-center justify-between">
@@ -312,38 +326,26 @@
         <template x-if="activeTab === 'partenaires'">
             <div class="max-w-6xl mx-auto py-24 px-6 space-y-12 animate-fade-in">
                 <div class="text-center space-y-4">
-                    <h2 class="text-4xl font-black uppercase tracking-tighter text-slate-900 italic text-center">Alliance Stratégique</h2>
+                    <h2 class="text-4xl font-black uppercase tracking-tighter text-slate-900 italic">Alliance Stratégique</h2>
                     <p class="text-slate-400 font-bold uppercase tracking-[0.2em] text-[10px]">Ils nous ont fait confiance</p>
                     <div class="w-24 h-1.5 bg-red-600 mx-auto rounded-full"></div>
                 </div>
-
-                <!-- Sous-navigation -->
                 <div class="flex justify-center gap-4">
-                    <button @click="partnerSubTab = 'entreprises'" 
-                            :class="partnerSubTab === 'entreprises' ? 'bg-red-600 text-white shadow-lg shadow-red-100' : 'bg-slate-50 text-slate-400 hover:text-slate-900'"
-                            class="px-8 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all">
-                        Entreprises
-                    </button>
-                    <button @click="partnerSubTab = 'institutions'" 
-                            :class="partnerSubTab === 'institutions' ? 'bg-red-600 text-white shadow-lg shadow-red-100' : 'bg-slate-50 text-slate-400 hover:text-slate-900'"
-                            class="px-8 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all">
-                        Institutions
-                    </button>
+                    <button @click="partnerSubTab = 'entreprises'" :class="partnerSubTab === 'entreprises' ? 'bg-red-600 text-white shadow-lg shadow-red-100' : 'bg-slate-50 text-slate-400 hover:text-slate-900'" class="px-8 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all">Entreprises</button>
+                    <button @click="partnerSubTab = 'institutions'" :class="partnerSubTab === 'institutions' ? 'bg-red-600 text-white shadow-lg shadow-red-100' : 'bg-slate-50 text-slate-400 hover:text-slate-900'" class="px-8 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all">Institutions</button>
                 </div>
-
-                <!-- Grille -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 text-center">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8">
                     <template x-if="partnerSubTab === 'entreprises'">
                         <template x-for="p in ['Airbus', 'Thales', 'Schneider Electric', 'Dassault Systèmes', 'Bouygues Énergie', 'Vinci', 'Alstom', 'Renault']">
                             <div class="bg-white p-12 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center justify-center group hover:border-red-600 transition-all h-40">
-                                <span class="font-black text-slate-200 group-hover:text-red-600 transition-colors uppercase tracking-[0.3em] text-[10px] text-center px-4" x-text="p"></span>
+                                <span class="font-black text-slate-200 group-hover:text-red-600 transition-colors uppercase tracking-[0.3em] text-[10px] text-center" x-text="p"></span>
                             </div>
                         </template>
                     </template>
                     <template x-if="partnerSubTab === 'institutions'">
                         <template x-for="p in ['CESI', 'Polytechnique', 'Inria', 'CTI', 'IESF', 'Syntec', 'OPIIEC', 'Institut Montaigne']">
                             <div class="bg-white p-12 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center justify-center group hover:border-red-600 transition-all h-40">
-                                <span class="font-black text-slate-200 group-hover:text-red-600 transition-colors uppercase tracking-[0.3em] text-[10px] text-center px-4" x-text="p"></span>
+                                <span class="font-black text-slate-200 group-hover:text-red-600 transition-colors uppercase tracking-[0.3em] text-[10px] text-center" x-text="p"></span>
                             </div>
                         </template>
                     </template>
@@ -353,58 +355,93 @@
 
     </main>
 
-    <!-- MODALE DÉTAILS AVEC PROGRAMME -->
+    <!-- FENÊTRE MODALE (TOTALEMENT REFAITE) -->
     <div x-cloak x-show="selectedCourse" 
-         class="fixed inset-0 z-[150] flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-xl" 
-         @click="selectedCourse = null">
-        <div class="bg-white rounded-[3rem] p-10 md:p-14 max-w-xl w-full shadow-2xl animate-fade-in relative overflow-hidden" @click.stop>
-            <div class="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-full -translate-y-1/2 translate-x-1/2 -z-10"></div>
+         class="fixed inset-0 z-[150] flex items-center justify-center p-4 md:p-6"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95">
+        
+        <!-- Background Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-xl" @click="selectedCourse = null"></div>
+        
+        <!-- Modal Card -->
+        <div class="bg-white rounded-[3.5rem] w-full max-w-4xl max-h-[90vh] shadow-2xl relative z-10 overflow-hidden flex flex-col md:flex-row animate-fade-in" @click.stop>
             
-            <div class="flex justify-between items-start mb-8 relative z-10">
-                <div class="p-5 bg-red-600 rounded-[1.5rem] text-white shadow-xl shadow-red-200 flex items-center justify-center">
-                    <i data-lucide="book-open" class="w-8 h-8"></i>
+            <!-- Left Side: Visual & Header -->
+            <div class="md:w-1/3 bg-slate-900 p-8 md:p-12 text-white flex flex-col relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full bg-red-600/10 opacity-20 pointer-events-none"></div>
+                
+                <div class="mb-auto relative z-10">
+                    <div class="w-16 h-16 bg-red-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-red-900/40">
+                        <i data-lucide="book-open" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <span class="inline-block px-3 py-1 bg-red-600/20 text-red-400 text-[10px] font-black rounded-lg uppercase tracking-widest mb-4" x-text="selectedCourse?.cat"></span>
+                    <h3 class="text-3xl font-black leading-tight tracking-tighter uppercase italic" x-text="selectedCourse?.title"></h3>
                 </div>
-                <button @click="selectedCourse = null" class="p-3 hover:bg-slate-100 rounded-full transition-colors text-slate-400">
-                    <i data-lucide="x"></i>
-                </button>
+                
+                <div class="mt-8 space-y-6 relative z-10 border-t border-white/10 pt-8">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="clock" class="w-4 h-4 text-slate-400"></i></div>
+                        <div>
+                            <p class="text-[10px] text-slate-400 uppercase font-black tracking-widest">Durée estimée</p>
+                            <p class="text-sm font-bold" x-text="selectedCourse?.dur"></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="bar-chart" class="w-4 h-4 text-slate-400"></i></div>
+                        <div>
+                            <p class="text-[10px] text-slate-400 uppercase font-black tracking-widest">Niveau Requis</p>
+                            <p class="text-sm font-bold" x-text="selectedCourse?.lvl"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="relative z-10 space-y-6">
-                <div>
-                    <h3 class="text-4xl font-black text-slate-900 mb-2 uppercase tracking-tighter leading-tight" x-text="selectedCourse?.title"></h3>
-                    <span class="inline-block px-4 py-2 bg-slate-100 text-slate-600 text-[11px] font-black rounded-xl uppercase tracking-widest" x-text="selectedCourse?.cat"></span>
-                </div>
-
-                <p class="text-slate-500 leading-relaxed text-lg" x-text="selectedCourse?.desc"></p>
-                
-                <!-- SECTION PROGRAMME (AJOUTÉE) -->
-                <div class="bg-slate-50 p-6 rounded-[2rem] border border-slate-100">
-                    <p class="text-[10px] font-black text-red-600 uppercase tracking-widest mb-4">Programme du module</p>
-                    <ul class="space-y-3">
-                        <template x-for="item in selectedCourse?.program">
-                            <li class="flex items-start gap-3">
-                                <div class="w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 shrink-0"></div>
-                                <p class="text-sm font-bold text-slate-700" x-text="item"></p>
-                            </li>
-                        </template>
-                    </ul>
-                </div>
-
-                <div class="grid grid-cols-2 gap-6 pt-4">
-                    <div class="p-6 bg-white rounded-[2rem] text-center border border-slate-100 shadow-sm">
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Durée</p>
-                        <p class="text-2xl font-black text-slate-900" x-text="selectedCourse?.dur"></p>
+            <!-- Right Side: Content & Action -->
+            <div class="md:w-2/3 p-8 md:p-14 bg-white flex flex-col overflow-y-auto">
+                <div class="flex justify-between items-start mb-8">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="shield-check" class="text-green-500 w-5 h-5"></i>
+                        <span class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Certification ENGINEEERSKILLS IA</span>
                     </div>
-                    <div class="p-6 bg-white rounded-[2rem] text-center border border-slate-100 shadow-sm">
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Niveau</p>
-                        <p class="text-2xl font-black text-slate-900" x-text="selectedCourse?.lvl"></p>
-                    </div>
+                    <button @click="selectedCourse = null" class="p-2 hover:bg-slate-50 rounded-full transition-colors group">
+                        <i data-lucide="x" class="w-6 h-6 text-slate-300 group-hover:text-red-600"></i>
+                    </button>
                 </div>
                 
-                <div class="pt-6">
+                <div class="space-y-10 flex-1">
+                    <div class="space-y-4">
+                        <h4 class="text-xs font-black text-red-600 uppercase tracking-widest">Présentation</h4>
+                        <p class="text-slate-500 leading-relaxed text-lg font-medium" x-text="selectedCourse?.desc"></p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <h4 class="text-xs font-black text-red-600 uppercase tracking-widest flex items-center gap-2">
+                            <i data-lucide="list-checks" class="w-4 h-4"></i> Programme Détaillé
+                        </h4>
+                        <div class="grid gap-3">
+                            <template x-for="(item, index) in selectedCourse?.program">
+                                <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-red-200 transition-all">
+                                    <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-[10px] font-black text-slate-400 group-hover:text-red-600" x-text="index + 1"></div>
+                                    <p class="text-sm font-bold text-slate-700" x-text="item"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-10 mt-10 border-t border-slate-50 flex gap-4">
                     <button @click="showNotification = true; selectedCourse = null; setTimeout(() => showNotification = false, 3000)" 
-                            class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-6 rounded-[2rem] transition-all shadow-2xl shadow-red-200 uppercase tracking-widest text-[10px] flex items-center justify-center gap-3 active:scale-95">
-                        <i data-lucide="plus-circle" class="w-5 h-5"></i> S'inscrire à ce module
+                            class="flex-1 bg-red-600 hover:bg-red-700 text-white font-black py-5 rounded-2xl transition-all shadow-xl shadow-red-200 uppercase tracking-widest text-xs flex items-center justify-center gap-3 active:scale-95 group">
+                        <i data-lucide="plus-circle" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                        S'inscrire à ce module
+                    </button>
+                    <button @click="selectedCourse = null" class="px-8 py-5 bg-slate-50 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all">
+                        Fermer
                     </button>
                 </div>
             </div>
